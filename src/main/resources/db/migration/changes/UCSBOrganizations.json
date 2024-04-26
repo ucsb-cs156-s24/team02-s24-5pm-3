@@ -1,0 +1,64 @@
+{
+  "databaseChangeLog": [
+    {
+      "changeSet": {
+        "id": "UCSBOrganizations-1",
+        "author": "MattP",
+        "preConditions": [
+          {
+            "onFail": "MARK_RAN"
+          },
+          {
+            "not": [
+              {
+                "tableExists": {
+                  "tableName": "UCSBORGANIZATIONS"
+                }
+              }
+            ]
+          }
+        ],
+        "changes": [
+          {
+            "createTable": {
+              "columns": [
+                {
+                  "column": {
+                    "constraints": {
+                      "primaryKey": true,
+                      "primaryKeyName": "CONSTRAINT_2"
+                    },
+                    "name": "orgCode",
+                    "type": "VARCHAR(255)"
+                  }
+                },
+                {
+                  "column": {
+                    "constraints": {
+                      "nullable": false
+                    },
+                    "name": "inactive",
+                    "type": "BOOLEAN"
+                  }
+                },
+                {
+                  "column": {
+                    "name": "orgTranslationShort",
+                    "type": "VARCHAR(255)"
+                  }
+                },
+                {
+                  "column": {
+                    "name": "orgTranslation",
+                    "type": "VARCHAR(255)"
+                  }
+                }
+              ],
+              "tableName": "UCSBORGANIZATIONS"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
