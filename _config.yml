@@ -23,4 +23,4 @@ repo_name: "TBD"
 repo: ucsb-cs156-s24/team02-s24-5pm-3
 owner: ucsb-cs156-s24
 repo_name: team02-s24-5pm-3
-pull_requests: [{"author":{"id":"U_kgDOBXy3rA","is_bot":false,"login":"andrew-kwon1","name":""},"headRefName":"Andrew-HelpRequest-create-db","number":43,"title":"helprequest database","url":"https://github.com/ucsb-cs156-s24/team02-s24-5pm-3/pull/43"}]
+pull_requests: [{"author":{"id":"MDQ6VXNlcjQzNzgzODc3","is_bot":false,"login":"yuxiaolejs","name":"Unics Yu"},"headRefName":"Tianle-UCSBOrg","number":44,"title":"[merge] Finished UCSB Organizations","url":"https://github.com/ucsb-cs156-s24/team02-s24-5pm-3/pull/44"},{"author":{"id":"U_kgDOBXy3rA","is_bot":false,"login":"andrew-kwon1","name":""},"headRefName":"Andrew-HelpRequest-create-db","number":43,"title":"helprequest database","url":"https://github.com/ucsb-cs156-s24/team02-s24-5pm-3/pull/43"}]
