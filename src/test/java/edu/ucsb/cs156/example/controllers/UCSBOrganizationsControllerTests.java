@@ -136,14 +136,14 @@ public class UCSBOrganizationsControllerTests extends ControllerTestCase {
                                 .orgCode("ORG1")
                                 .orgTranslationShort("O1")
                                 .orgTranslation("Organization 1")
-                                .inactive(false)
+                                .inactive(true)
                                 .build();
 
                 when(ucsbOrganizationsRepository.save(eq(org1))).thenReturn(org1);
 
                 // act
                 MvcResult response = mockMvc.perform(
-                                post("/api/ucsborganizations/post?orgCode=ORG1&orgTranslationShort=O1&orgTranslation=Organization 1&inactive=false")
+                                post("/api/ucsborganizations/post?orgCode=ORG1&orgTranslationShort=O1&orgTranslation=Organization 1&inactive=true")
                                                 .with(csrf()))
                                 .andExpect(status().isOk()).andReturn();
 
@@ -200,7 +200,7 @@ public class UCSBOrganizationsControllerTests extends ControllerTestCase {
                                 .orgCode("ISFA")
                                 .orgTranslationShort("ISFA")
                                 .orgTranslation("International Students' Film Association")
-                                .inactive(false)
+                                .inactive(true)
                                 .build();
 
                 when(ucsbOrganizationsRepository.findById(eq("portola"))).thenReturn(Optional.of(isfa));
@@ -254,10 +254,10 @@ public class UCSBOrganizationsControllerTests extends ControllerTestCase {
                                 .build();
 
                 UCSBOrganizations org2 = UCSBOrganizations.builder()
-                                .orgCode("ORG1")
+                                .orgCode("ORG11")
                                 .orgTranslationShort("O2")
                                 .orgTranslation("Organization 2")
-                                .inactive(false)
+                                .inactive(true)
                                 .build();
 
                 String requestBody = mapper.writeValueAsString(org2);
