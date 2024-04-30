@@ -65,9 +65,9 @@ public class UCSBOrganizationsController extends ApiController {
     @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping("")
     public UCSBOrganizations getById(
-            @Parameter(name="code") @RequestParam String code) {
-        UCSBOrganizations orgs = ucsbOrganizationsRepository.findById(code)
-                .orElseThrow(() -> new EntityNotFoundException(UCSBOrganizations.class, code));
+            @Parameter(name="id") @RequestParam String id) {
+        UCSBOrganizations orgs = ucsbOrganizationsRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException(UCSBOrganizations.class, id));
 
         return orgs;
     }
@@ -76,23 +76,23 @@ public class UCSBOrganizationsController extends ApiController {
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("")
     public Object deleteOrgs(
-            @Parameter(name="code") @RequestParam String code) {
-        UCSBOrganizations orgs = ucsbOrganizationsRepository.findById(code)
-                .orElseThrow(() -> new EntityNotFoundException(UCSBOrganizations.class, code));
+            @Parameter(name="id") @RequestParam String id) {
+        UCSBOrganizations orgs = ucsbOrganizationsRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException(UCSBOrganizations.class, id));
 
         ucsbOrganizationsRepository.delete(orgs);
-        return genericMessage("UCSBOrganizations with id %s deleted".formatted(code));
+        return genericMessage("UCSBOrganizations with id %s deleted".formatted(id));
     }
 
     @Operation(summary= "Update a single UCSBOrganizations")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping("")
     public UCSBOrganizations updateOrgs(
-            @Parameter(name="code") @RequestParam String code,
+            @Parameter(name="id") @RequestParam String id,
             @RequestBody @Valid UCSBOrganizations incoming) {
 
-        UCSBOrganizations orgs = ucsbOrganizationsRepository.findById(code)
-                .orElseThrow(() -> new EntityNotFoundException(UCSBOrganizations.class, code));
+        UCSBOrganizations orgs = ucsbOrganizationsRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException(UCSBOrganizations.class, id));
 
 
         orgs.setOrgCode(incoming.getOrgCode());  
