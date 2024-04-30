@@ -31,7 +31,7 @@ import javax.validation.Valid;
     @Autowired
     UCSBOrganizationsRepository ucsbOrganizationsRepository;
 
-    @Operation(summary= &quot;List all UCSBOrganizations&quot;)
+    @Operation(summary = &quot;List all UCSBOrganizations&quot;)
     @PreAuthorize(&quot;hasRole('ROLE_USER')&quot;)
     @GetMapping(&quot;/all&quot;)
     public Iterable&lt;UCSBOrganizations&gt; allOrgss() {
@@ -39,70 +39,67 @@ import javax.validation.Valid;
 <span class="fc" id="L39">        return orgs;</span>
     }
 
-    @Operation(summary= &quot;Create a new UCSBOrganizations&quot;)
+    @Operation(summary = &quot;Create a new UCSBOrganizations&quot;)
     @PreAuthorize(&quot;hasRole('ROLE_ADMIN')&quot;)
     @PostMapping(&quot;/post&quot;)
     public UCSBOrganizations postOrgs(
-        @Parameter(name=&quot;orgCode&quot;) @RequestParam String orgCode,
-        @Parameter(name=&quot;orgTranslationShort&quot;) @RequestParam String orgTranslationShort,
-        @Parameter(name=&quot;orgTranslation&quot;) @RequestParam String orgTranslation,
-        @Parameter(name=&quot;inactive&quot;) @RequestParam boolean inactive
-        )
-        {
+            @Parameter(name = &quot;orgCode&quot;) @RequestParam String orgCode,
+            @Parameter(name = &quot;orgTranslationShort&quot;) @RequestParam String orgTranslationShort,
+            @Parameter(name = &quot;orgTranslation&quot;) @RequestParam String orgTranslation,
+            @Parameter(name = &quot;inactive&quot;) @RequestParam boolean inactive) {
 
-<span class="fc" id="L53">        UCSBOrganizations org = new UCSBOrganizations();</span>
-<span class="fc" id="L54">        org.setOrgCode(orgCode);</span>
-<span class="fc" id="L55">        org.setOrgTranslationShort(orgTranslationShort);</span>
-<span class="fc" id="L56">        org.setOrgTranslation(orgTranslation);</span>
-<span class="fc" id="L57">        org.setInactive(inactive);</span>
+<span class="fc" id="L51">        UCSBOrganizations org = new UCSBOrganizations();</span>
+<span class="fc" id="L52">        org.setOrgCode(orgCode);</span>
+<span class="fc" id="L53">        org.setOrgTranslationShort(orgTranslationShort);</span>
+<span class="fc" id="L54">        org.setOrgTranslation(orgTranslation);</span>
+<span class="fc" id="L55">        org.setInactive(inactive);</span>
 
-<span class="fc" id="L59">        UCSBOrganizations savedOrgs = ucsbOrganizationsRepository.save(org);</span>
+<span class="fc" id="L57">        UCSBOrganizations savedOrgs = ucsbOrganizationsRepository.save(org);</span>
 
-<span class="fc" id="L61">        return savedOrgs;</span>
+<span class="fc" id="L59">        return savedOrgs;</span>
     }
 
-    @Operation(summary= &quot;Get a single UCSBOrganizations&quot;)
+    @Operation(summary = &quot;Get a single UCSBOrganizations&quot;)
     @PreAuthorize(&quot;hasRole('ROLE_USER')&quot;)
     @GetMapping(&quot;&quot;)
     public UCSBOrganizations getById(
-            @Parameter(name=&quot;id&quot;) @RequestParam String id) {
-<span class="fc" id="L69">        UCSBOrganizations orgs = ucsbOrganizationsRepository.findById(id)</span>
-<span class="fc" id="L70">                .orElseThrow(() -&gt; new EntityNotFoundException(UCSBOrganizations.class, id));</span>
+            @Parameter(name = &quot;id&quot;) @RequestParam(name = &quot;orgCode&quot;) String id) {
+<span class="fc" id="L67">        UCSBOrganizations orgs = ucsbOrganizationsRepository.findById(id)</span>
+<span class="fc" id="L68">                .orElseThrow(() -&gt; new EntityNotFoundException(UCSBOrganizations.class, id));</span>
 
-<span class="fc" id="L72">        return orgs;</span>
+<span class="fc" id="L70">        return orgs;</span>
     }
 
-    @Operation(summary= &quot;Delete a UCSBOrganizations&quot;)
+    @Operation(summary = &quot;Delete a UCSBOrganizations&quot;)
     @PreAuthorize(&quot;hasRole('ROLE_ADMIN')&quot;)
     @DeleteMapping(&quot;&quot;)
     public Object deleteOrgs(
-            @Parameter(name=&quot;id&quot;) @RequestParam String id) {
-<span class="fc" id="L80">        UCSBOrganizations orgs = ucsbOrganizationsRepository.findById(id)</span>
-<span class="fc" id="L81">                .orElseThrow(() -&gt; new EntityNotFoundException(UCSBOrganizations.class, id));</span>
+            @Parameter(name = &quot;id&quot;) @RequestParam(name = &quot;orgCode&quot;) String id) {
+<span class="fc" id="L78">        UCSBOrganizations orgs = ucsbOrganizationsRepository.findById(id)</span>
+<span class="fc" id="L79">                .orElseThrow(() -&gt; new EntityNotFoundException(UCSBOrganizations.class, id));</span>
 
-<span class="fc" id="L83">        ucsbOrganizationsRepository.delete(orgs);</span>
-<span class="fc" id="L84">        return genericMessage(&quot;UCSBOrganizations with id %s deleted&quot;.formatted(id));</span>
+<span class="fc" id="L81">        ucsbOrganizationsRepository.delete(orgs);</span>
+<span class="fc" id="L82">        return genericMessage(&quot;UCSBOrganizations with id %s deleted&quot;.formatted(id));</span>
     }
 
-    @Operation(summary= &quot;Update a single UCSBOrganizations&quot;)
+    @Operation(summary = &quot;Update a single UCSBOrganizations&quot;)
     @PreAuthorize(&quot;hasRole('ROLE_ADMIN')&quot;)
     @PutMapping(&quot;&quot;)
     public UCSBOrganizations updateOrgs(
-            @Parameter(name=&quot;id&quot;) @RequestParam String id,
+            @Parameter(name = &quot;id&quot;) @RequestParam(name = &quot;orgCode&quot;) String id,
             @RequestBody @Valid UCSBOrganizations incoming) {
 
-<span class="fc" id="L94">        UCSBOrganizations orgs = ucsbOrganizationsRepository.findById(id)</span>
-<span class="fc" id="L95">                .orElseThrow(() -&gt; new EntityNotFoundException(UCSBOrganizations.class, id));</span>
+<span class="fc" id="L92">        UCSBOrganizations orgs = ucsbOrganizationsRepository.findById(id)</span>
+<span class="fc" id="L93">                .orElseThrow(() -&gt; new EntityNotFoundException(UCSBOrganizations.class, id));</span>
 
+<span class="fc" id="L95">        orgs.setOrgCode(incoming.getOrgCode());</span>
+<span class="fc" id="L96">        orgs.setOrgTranslationShort(incoming.getOrgTranslationShort());</span>
+<span class="fc" id="L97">        orgs.setOrgTranslation(incoming.getOrgTranslation());</span>
+<span class="fc" id="L98">        orgs.setInactive(incoming.getInactive());</span>
 
-<span class="fc" id="L98">        orgs.setOrgCode(incoming.getOrgCode());  </span>
-<span class="fc" id="L99">        orgs.setOrgTranslationShort(incoming.getOrgTranslationShort());</span>
-<span class="fc" id="L100">        orgs.setOrgTranslation(incoming.getOrgTranslation());</span>
-<span class="fc" id="L101">        orgs.setInactive(incoming.getInactive());</span>
+<span class="fc" id="L100">        ucsbOrganizationsRepository.save(orgs);</span>
 
-<span class="fc" id="L103">        ucsbOrganizationsRepository.save(orgs);</span>
-
-<span class="fc" id="L105">        return orgs;</span>
+<span class="fc" id="L102">        return orgs;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
