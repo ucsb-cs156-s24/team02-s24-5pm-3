@@ -51,17 +51,17 @@ public class MenuItemRevivewController extends ApiController {
             @Parameter(name = "itemid") @RequestParam long itemId,
             @Parameter(name = "email") @RequestParam String reviewerEmail,
             @Parameter(name = "stars (from 0 to 5)") @RequestParam int stars,
-            @Parameter(name = "date (in iso format, e.g. YYYY-mm-ddTHH:MM:SS)") @RequestParam("localDateTime") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime localDateTime,
+            @Parameter(name = "date reviewed") @RequestParam("dateReviewed") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime dateReviewed,
             @Parameter(name = "comments") @RequestParam String comments)
             throws JsonProcessingException {
 
-        log.info("localDateTime={}", localDateTime);
+        log.info("localDateTime={}", dateReviewed);
 
         MenuItemReview menuItemReview = new MenuItemReview();
         menuItemReview.setItemId(itemId);
         menuItemReview.setReviewerEmail(reviewerEmail);
         menuItemReview.setStars(stars);
-        menuItemReview.setDateReviewed(localDateTime);
+        menuItemReview.setDateReviewed(dateReviewed);
         menuItemReview.setComments(comments);
 
         MenuItemReview savedMenuItemReview = MenuItemReviewRepository.save(menuItemReview);
