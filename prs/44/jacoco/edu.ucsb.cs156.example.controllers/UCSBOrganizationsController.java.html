@@ -63,7 +63,7 @@ import javax.validation.Valid;
     @PreAuthorize(&quot;hasRole('ROLE_USER')&quot;)
     @GetMapping(&quot;&quot;)
     public UCSBOrganizations getById(
-            @Parameter(name = &quot;id&quot;) @RequestParam(name = &quot;orgCode&quot;) String id) {
+            @Parameter(name = &quot;orgCode&quot;) @RequestParam(name = &quot;orgCode&quot;) String id) {
 <span class="fc" id="L67">        UCSBOrganizations orgs = ucsbOrganizationsRepository.findById(id)</span>
 <span class="fc" id="L68">                .orElseThrow(() -&gt; new EntityNotFoundException(UCSBOrganizations.class, id));</span>
 
@@ -74,7 +74,7 @@ import javax.validation.Valid;
     @PreAuthorize(&quot;hasRole('ROLE_ADMIN')&quot;)
     @DeleteMapping(&quot;&quot;)
     public Object deleteOrgs(
-            @Parameter(name = &quot;id&quot;) @RequestParam(name = &quot;orgCode&quot;) String id) {
+            @Parameter(name = &quot;orgCode&quot;) @RequestParam(name = &quot;orgCode&quot;) String id) {
 <span class="fc" id="L78">        UCSBOrganizations orgs = ucsbOrganizationsRepository.findById(id)</span>
 <span class="fc" id="L79">                .orElseThrow(() -&gt; new EntityNotFoundException(UCSBOrganizations.class, id));</span>
 
@@ -86,7 +86,7 @@ import javax.validation.Valid;
     @PreAuthorize(&quot;hasRole('ROLE_ADMIN')&quot;)
     @PutMapping(&quot;&quot;)
     public UCSBOrganizations updateOrgs(
-            @Parameter(name = &quot;id&quot;) @RequestParam(name = &quot;orgCode&quot;) String id,
+            @Parameter(name = &quot;orgCode&quot;) @RequestParam(name = &quot;orgCode&quot;) String id,
             @RequestBody @Valid UCSBOrganizations incoming) {
 
 <span class="fc" id="L92">        UCSBOrganizations orgs = ucsbOrganizationsRepository.findById(id)</span>
