@@ -201,8 +201,8 @@ public class ArticlesControllerTests extends ControllerTestCase {
     }
 
 
-    // Tests for DELETE /api/ucsbdates?id=... 
-/* 
+    // Tests for DELETE /api/articles?id=... 
+ 
     @WithMockUser(roles = { "ADMIN", "USER" })
     @Test
     public void admin_can_delete_a_date() throws Exception {
@@ -210,26 +210,28 @@ public class ArticlesControllerTests extends ControllerTestCase {
 
             LocalDateTime ldt1 = LocalDateTime.parse("2022-01-03T00:00:00");
 
-            UCSBDate ucsbDate1 = UCSBDate.builder()
-                            .name("firstDayOfClasses")
-                            .quarterYYYYQ("20222")
-                            .localDateTime(ldt1)
-                            .build();
+            Articles articles1 = Articles.builder()
+                                .title("testtitle")
+                                .url("testurl")
+                                .explanation("testexplanation")
+                                .email("testemail")
+                                .dateAdded(ldt1)
+                                .build();
 
-            when(ucsbDateRepository.findById(eq(15L))).thenReturn(Optional.of(ucsbDate1));
+            when(articlesRepository.findById(eq(15L))).thenReturn(Optional.of(articles1));
 
             // act
             MvcResult response = mockMvc.perform(
-                            delete("/api/ucsbdates?id=15")
+                            delete("/api/articles?id=15")
                                             .with(csrf()))
                             .andExpect(status().isOk()).andReturn();
 
             // assert
-            verify(ucsbDateRepository, times(1)).findById(15L);
-            verify(ucsbDateRepository, times(1)).delete(any());
+            verify(articlesRepository, times(1)).findById(15L);
+            verify(articlesRepository, times(1)).delete(any());
 
             Map<String, Object> json = responseToJson(response);
-            assertEquals("UCSBDate with id 15 deleted", json.get("message"));
+            assertEquals("Articles with id 15 deleted", json.get("message"));
     }
     
     @WithMockUser(roles = { "ADMIN", "USER" })
@@ -238,21 +240,21 @@ public class ArticlesControllerTests extends ControllerTestCase {
                     throws Exception {
             // arrange
 
-            when(ucsbDateRepository.findById(eq(15L))).thenReturn(Optional.empty());
+            when(articlesRepository.findById(eq(15L))).thenReturn(Optional.empty());
 
             // act
             MvcResult response = mockMvc.perform(
-                            delete("/api/ucsbdates?id=15")
+                            delete("/api/articles?id=15")
                                             .with(csrf()))
                             .andExpect(status().isNotFound()).andReturn();
 
             // assert
-            verify(ucsbDateRepository, times(1)).findById(15L);
+            verify(articlesRepository, times(1)).findById(15L);
             Map<String, Object> json = responseToJson(response);
-            assertEquals("UCSBDate with id 15 not found", json.get("message"));
+            assertEquals("Articles with id 15 not found", json.get("message"));
     }
 
-    // Tests for PUT /api/ucsbdates?id=... 
+    // Tests for PUT /api/articles?id=... 
 
     @WithMockUser(roles = { "ADMIN", "USER" })
     @Test
@@ -262,25 +264,29 @@ public class ArticlesControllerTests extends ControllerTestCase {
             LocalDateTime ldt1 = LocalDateTime.parse("2022-01-03T00:00:00");
             LocalDateTime ldt2 = LocalDateTime.parse("2023-01-03T00:00:00");
 
-            UCSBDate ucsbDateOrig = UCSBDate.builder()
-                            .name("firstDayOfClasses")
-                            .quarterYYYYQ("20222")
-                            .localDateTime(ldt1)
-                            .build();
+            Articles articles1 = Articles.builder()
+                                .title("testtitle")
+                                .url("testurl")
+                                .explanation("testexplanation")
+                                .email("testemail")
+                                .dateAdded(ldt1)
+                                .build();
 
-            UCSBDate ucsbDateEdited = UCSBDate.builder()
-                            .name("firstDayOfFestivus")
-                            .quarterYYYYQ("20232")
-                            .localDateTime(ldt2)
-                            .build();
+            Articles articles2 = Articles.builder()
+                                .title("testtitle2")
+                                .url("testurl2")
+                                .explanation("testexplanation2")
+                                .email("testemail2")
+                                .dateAdded(ldt2)
+                                .build();
 
-            String requestBody = mapper.writeValueAsString(ucsbDateEdited);
+            String requestBody = mapper.writeValueAsString(articles2);
 
-            when(ucsbDateRepository.findById(eq(67L))).thenReturn(Optional.of(ucsbDateOrig));
+            when(articlesRepository.findById(eq(67L))).thenReturn(Optional.of(articles1));
 
             // act
             MvcResult response = mockMvc.perform(
-                            put("/api/ucsbdates?id=67")
+                            put("/api/articles?id=67")
                                             .contentType(MediaType.APPLICATION_JSON)
                                             .characterEncoding("utf-8")
                                             .content(requestBody)
@@ -288,8 +294,8 @@ public class ArticlesControllerTests extends ControllerTestCase {
                             .andExpect(status().isOk()).andReturn();
 
             // assert
-            verify(ucsbDateRepository, times(1)).findById(67L);
-            verify(ucsbDateRepository, times(1)).save(ucsbDateEdited); // should be saved with correct user
+            verify(articlesRepository, times(1)).findById(67L);
+            verify(articlesRepository, times(1)).save(articles2); // should be saved with correct user
             String responseString = response.getResponse().getContentAsString();
             assertEquals(requestBody, responseString);
     }
@@ -302,19 +308,21 @@ public class ArticlesControllerTests extends ControllerTestCase {
 
             LocalDateTime ldt1 = LocalDateTime.parse("2022-01-03T00:00:00");
 
-            UCSBDate ucsbEditedDate = UCSBDate.builder()
-                            .name("firstDayOfClasses")
-                            .quarterYYYYQ("20222")
-                            .localDateTime(ldt1)
+            Articles articles2 = Articles.builder()
+                            .title("testtitle2")
+                            .url("testurl2")
+                            .explanation("testexplanation2")
+                            .email("testemail2")
+                            .dateAdded(ldt1)
                             .build();
 
-            String requestBody = mapper.writeValueAsString(ucsbEditedDate);
+            String requestBody = mapper.writeValueAsString(articles2);
 
-            when(ucsbDateRepository.findById(eq(67L))).thenReturn(Optional.empty());
+            when(articlesRepository.findById(eq(67L))).thenReturn(Optional.empty());
 
             // act
             MvcResult response = mockMvc.perform(
-                            put("/api/ucsbdates?id=67")
+                            put("/api/articles?id=67")
                                             .contentType(MediaType.APPLICATION_JSON)
                                             .characterEncoding("utf-8")
                                             .content(requestBody)
@@ -322,10 +330,10 @@ public class ArticlesControllerTests extends ControllerTestCase {
                             .andExpect(status().isNotFound()).andReturn();
 
             // assert
-            verify(ucsbDateRepository, times(1)).findById(67L);
+            verify(articlesRepository, times(1)).findById(67L);
             Map<String, Object> json = responseToJson(response);
-            assertEquals("UCSBDate with id 67 not found", json.get("message"));
+            assertEquals("Articles with id 67 not found", json.get("message"));
 
     }
-    */
+    
 }

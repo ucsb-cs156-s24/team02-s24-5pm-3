@@ -82,36 +82,38 @@ public class ArticlesController extends ApiController {
 
         return articles;
     }
-/*
-    @Operation(summary= "Delete a UCSBDate")
+
+    @Operation(summary= "Delete a Article")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("")
-    public Object deleteUCSBDate(
+    public Object deleteArticle(
             @Parameter(name="id") @RequestParam Long id) {
         Articles articles = articlesRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException(UCSBDate.class, id));
+                .orElseThrow(() -> new EntityNotFoundException(Articles.class, id));
 
         articlesRepository.delete(articles);
-        return genericMessage("UCSBDate with id %s deleted".formatted(id));
+        return genericMessage("Articles with id %s deleted".formatted(id));
     }
 
-    @Operation(summary= "Update a single date")
+    @Operation(summary= "Update a single article")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping("")
-    public Articles updateUCSBDate(
+    public Articles updateArticle(
             @Parameter(name="id") @RequestParam Long id,
             @RequestBody @Valid Articles incoming) {
 
         Articles articles = articlesRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException(UCSBDate.class, id));
+                .orElseThrow(() -> new EntityNotFoundException(Articles.class, id));
 
-        articles.setQuarterYYYYQ(incoming.getQuarterYYYYQ());
-        articles.setName(incoming.getName());
-        articles.setLocalDateTime(incoming.getLocalDateTime());
+        articles.setTitle(incoming.getTitle());
+        articles.setUrl(incoming.getUrl());
+        articles.setExplanation(incoming.getExplanation());
+        articles.setEmail(incoming.getEmail());
+        articles.setDateAdded(incoming.getDateAdded());
 
         articlesRepository.save(articles);
 
         return articles;
     }
-    */
+    
 }
