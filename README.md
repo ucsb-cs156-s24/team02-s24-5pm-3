@@ -4,6 +4,17 @@ Instructions: <https://ucsb-cs156.github.io/s24/lab/team02.html>
 
 TODO: change heading above to your repo name, e.g. `# team02-s24-6pm-4`
 
+```
+| Table                       | Team Member  | Github Id     |
+|-----------------------------|--------------|---------------|
+| `UCSBDiningCommonsMenuItem` | Aaron Rosales| Xalex217      |
+| `UCSBOrganization`          | Tianle Yu    | yuxiaolejs    |
+| `RecommendationRequest`     | Tyler Canepa | tmcanepa      |
+| `MenuItemReview`            | Tyler Tran   | sherpatran    |
+| `HelpRequest`               | Andrew Kwon  | andrew-kwon1  |
+| `Articles`                  | Aaron L      | 30912hyl      |
+```
+
 - Aaron L:  Articles
 - Tyler Tran: Menu Item Reviews
 - Andrew Kwon:  Help Requests
