@@ -1,7 +1,7 @@
 { "databaseChangeLog": [
     {
         "changeSet": {
-          "id": "HELPREQUEST-2",
+          "id": "HELPREQUEST-4",
           "author": "AndrewK",
           "preConditions": [
             {
@@ -26,7 +26,7 @@
                       "autoIncrement": true,
                       "constraints": {
                         "primaryKey": true,
-                        "primaryKeyName": "CONSTRAINT_20"
+                        "primaryKeyName": "CONSTRAINT_90"
                       },
                       "name": "ID",
                       "type": "BIGINT"
@@ -40,7 +40,7 @@
                   },
                   {
                     "column": {
-                      "name": "TEAMID",
+                      "name": "TEAM_ID",
                       "type": "VARCHAR(255)"
                     }
                   },
