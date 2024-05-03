@@ -28,7 +28,7 @@ import javax.validation.Valid;
 import java.time.LocalDateTime;
 
 @Tag(name = "Articles")
-@RequestMapping("/api/articles")
+@RequestMapping("/api/Articles")
 @RestController
 @Slf4j
 public class ArticlesController extends ApiController {

@@ -41,18 +41,18 @@ public class ArticlesControllerTests extends ControllerTestCase {
     @MockBean
     UserRepository userRepository;
 
-    // Tests for GET /api/articles/all
+    // Tests for GET /api/Articles/all
     
     @Test
     public void logged_out_users_cannot_get_all() throws Exception {
-        mockMvc.perform(get("/api/articles/all"))
+        mockMvc.perform(get("/api/Articles/all"))
                             .andExpect(status().is(403)); // logged out users can't get all
     }
 
     @WithMockUser(roles = { "USER" })
     @Test
     public void logged_in_users_can_get_all() throws Exception {
-            mockMvc.perform(get("/api/articles/all"))
+            mockMvc.perform(get("/api/Articles/all"))
                             .andExpect(status().is(200)); // logged
     }
 
@@ -87,7 +87,7 @@ public class ArticlesControllerTests extends ControllerTestCase {
             when(articlesRepository.findAll()).thenReturn(expectedArticles);
 
             // act
-            MvcResult response = mockMvc.perform(get("/api/articles/all"))
+            MvcResult response = mockMvc.perform(get("/api/Articles/all"))
                             .andExpect(status().isOk()).andReturn();
 
             // assert
@@ -102,14 +102,14 @@ public class ArticlesControllerTests extends ControllerTestCase {
 
     @Test
     public void logged_out_users_cannot_post() throws Exception {
-            mockMvc.perform(post("/api/articles/post"))
+            mockMvc.perform(post("/api/Articles/post"))
                             .andExpect(status().is(403));
     }
 
     @WithMockUser(roles = { "USER" })
     @Test
     public void logged_in_regular_users_cannot_post() throws Exception {
-            mockMvc.perform(post("/api/articles/post"))
+            mockMvc.perform(post("/api/Articles/post"))
                             .andExpect(status().is(403)); // only admins can post
     }
 
@@ -132,7 +132,7 @@ public class ArticlesControllerTests extends ControllerTestCase {
 
             // act
             MvcResult response = mockMvc.perform(
-                            post("/api/articles/post?title=testtitle&url=testurl&explanation=testexplanation&email=testemail&dateAdded=2022-01-03T00:00:00")
+                            post("/api/Articles/post?title=testtitle&url=testurl&explanation=testexplanation&email=testemail&dateAdded=2022-01-03T00:00:00")
                                             .with(csrf()))
                             .andExpect(status().isOk()).andReturn();
 
@@ -147,7 +147,7 @@ public class ArticlesControllerTests extends ControllerTestCase {
 
     @Test
     public void logged_out_users_cannot_get_by_id() throws Exception {
-            mockMvc.perform(get("/api/articles?id=7"))
+            mockMvc.perform(get("/api/Articles?id=7"))
                             .andExpect(status().is(403)); // logged out users can't get by id
     }
 
@@ -169,7 +169,7 @@ public class ArticlesControllerTests extends ControllerTestCase {
             when(articlesRepository.findById(eq(7L))).thenReturn(Optional.of(articles1));
 
             // act
-            MvcResult response = mockMvc.perform(get("/api/articles?id=7"))
+            MvcResult response = mockMvc.perform(get("/api/Articles?id=7"))
                             .andExpect(status().isOk()).andReturn();
 
             // assert
@@ -189,7 +189,7 @@ public class ArticlesControllerTests extends ControllerTestCase {
             when(articlesRepository.findById(eq(7L))).thenReturn(Optional.empty());
 
             // act
-            MvcResult response = mockMvc.perform(get("/api/articles?id=7"))
+            MvcResult response = mockMvc.perform(get("/api/Articles?id=7"))
                             .andExpect(status().isNotFound()).andReturn();
 
             // assert
@@ -201,7 +201,7 @@ public class ArticlesControllerTests extends ControllerTestCase {
     }
 
 
-    // Tests for DELETE /api/articles?id=... 
+    // Tests for DELETE /api/Articles?id=... 
  
     @WithMockUser(roles = { "ADMIN", "USER" })
     @Test
@@ -222,7 +222,7 @@ public class ArticlesControllerTests extends ControllerTestCase {
 
             // act
             MvcResult response = mockMvc.perform(
-                            delete("/api/articles?id=15")
+                            delete("/api/Articles?id=15")
                                             .with(csrf()))
                             .andExpect(status().isOk()).andReturn();
 
@@ -244,7 +244,7 @@ public class ArticlesControllerTests extends ControllerTestCase {
 
             // act
             MvcResult response = mockMvc.perform(
-                            delete("/api/articles?id=15")
+                            delete("/api/Articles?id=15")
                                             .with(csrf()))
                             .andExpect(status().isNotFound()).andReturn();
 
@@ -254,7 +254,7 @@ public class ArticlesControllerTests extends ControllerTestCase {
             assertEquals("Articles with id 15 not found", json.get("message"));
     }
 
-    // Tests for PUT /api/articles?id=... 
+    // Tests for PUT /api/Articles?id=... 
 
     @WithMockUser(roles = { "ADMIN", "USER" })
     @Test
@@ -286,7 +286,7 @@ public class ArticlesControllerTests extends ControllerTestCase {
 
             // act
             MvcResult response = mockMvc.perform(
-                            put("/api/articles?id=67")
+                            put("/api/Articles?id=67")
                                             .contentType(MediaType.APPLICATION_JSON)
                                             .characterEncoding("utf-8")
                                             .content(requestBody)
@@ -322,7 +322,7 @@ public class ArticlesControllerTests extends ControllerTestCase {
 
             // act
             MvcResult response = mockMvc.perform(
-                            put("/api/articles?id=67")
+                            put("/api/Articles?id=67")
                                             .contentType(MediaType.APPLICATION_JSON)
                                             .characterEncoding("utf-8")
                                             .content(requestBody)
