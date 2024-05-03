@@ -3,6 +3,7 @@ package edu.ucsb.cs156.example.controllers;
 import edu.ucsb.cs156.example.repositories.UserRepository;
 import edu.ucsb.cs156.example.testconfig.TestConfig;
 import edu.ucsb.cs156.example.ControllerTestCase;
+import edu.ucsb.cs156.example.entities.UCSBDate;
 import edu.ucsb.cs156.example.entities.UCSBDiningCommonsMenuItems;
 import edu.ucsb.cs156.example.repositories.UCSBDiningCommonsMenuItemsRepository;
 
@@ -35,6 +36,7 @@ import static org.mockito.Mockito.when;
 @WebMvcTest(controllers = UCSBDiningCommonsMenuItemController.class)
 @Import(TestConfig.class)
 public class UCSBDiningCommonsMenuItemControllerTests extends ControllerTestCase {
+
     @MockBean
     UCSBDiningCommonsMenuItemsRepository ucsbDiningCommonsMenuItemsRepository;
 
@@ -136,5 +138,57 @@ public class UCSBDiningCommonsMenuItemControllerTests extends ControllerTestCase
             assertEquals(expectedJson, responseString);
     }
 
+// Tests for GET /api/ucsbdates?id=...
 
+        @Test
+        public void logged_out_users_cannot_get_by_id() throws Exception {
+                mockMvc.perform(get("/api/ucsbDiningCommonsMenuItems?id=123"))
+                                .andExpect(status().is(403)); // logged out users can't get by id
+        }
+
+        @WithMockUser(roles = { "USER" })
+        @Test
+        public void test_that_logged_in_user_can_get_by_id_when_the_id_exists() throws Exception {
+
+                // arrange
+
+                UCSBDiningCommonsMenuItems ucsbDining = UCSBDiningCommonsMenuItems.builder()
+                        .diningCommonsCode("diningCommonsCode")
+                        .name("name")
+                        .station("station")
+                        .build();
+
+                when(ucsbDiningCommonsMenuItemsRepository.findById(eq(123L))).thenReturn(Optional.of(ucsbDining));
+
+                // act
+                MvcResult response = mockMvc.perform(get("/api/ucsbDiningCommonsMenuItems?id=123"))
+                                .andExpect(status().isOk()).andReturn();
+
+                // assert
+
+                verify(ucsbDiningCommonsMenuItemsRepository, times(1)).findById(eq(123L));
+                String expectedJson = mapper.writeValueAsString(ucsbDining);
+                String responseString = response.getResponse().getContentAsString();
+                assertEquals(expectedJson, responseString);
+        }
+
+        @WithMockUser(roles = { "USER" })
+        @Test
+        public void test_that_logged_in_user_can_get_by_id_when_the_id_does_not_exist() throws Exception {
+
+                // arrange
+
+                when(ucsbDiningCommonsMenuItemsRepository.findById(eq(123L))).thenReturn(Optional.empty());
+
+                // act
+                MvcResult response = mockMvc.perform(get("/api/ucsbDiningCommonsMenuItems?id=123"))
+                                .andExpect(status().isNotFound()).andReturn();
+
+                // assert
+
+                verify(ucsbDiningCommonsMenuItemsRepository, times(1)).findById(eq(123L));
+                Map<String, Object> json = responseToJson(response);
+                assertEquals("EntityNotFoundException", json.get("type"));
+                assertEquals("UCSBDiningCommonsMenuItems with id 123 not found", json.get("message"));
+        }
 }
