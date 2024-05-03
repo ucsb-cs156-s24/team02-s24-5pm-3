@@ -2,7 +2,7 @@
   "databaseChangeLog": [
     {
       "changeSet": {
-        "id": "MenuItemReview-4",
+        "id": "MenuItemReview-5",
         "author": "Tyler",
         "preConditions": [
           {
@@ -27,7 +27,7 @@
                     "autoIncrement": true,
                     "constraints": {
                       "primaryKey": true,
-                      "primaryKeyName": "CONSTRAINT_3"
+                      "primaryKeyName": "CONSTRAINT_59"
                     },
                     "name": "ID",
                     "type": "BIGINT"
