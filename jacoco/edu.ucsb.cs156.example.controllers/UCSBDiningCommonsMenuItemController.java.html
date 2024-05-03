@@ -80,6 +80,35 @@ import java.time.LocalDateTime;
 <span class="fc" id="L80">        return ucsbDiningCommonsMenuItems;</span>
     }
 
-    
+    @Operation(summary= &quot;Update a single menu&quot;)
+    @PreAuthorize(&quot;hasRole('ROLE_ADMIN')&quot;)
+    @PutMapping(&quot;&quot;)
+    public UCSBDiningCommonsMenuItems updateUCSBDiningCommonsMenuItem(
+            @Parameter(name=&quot;id&quot;) @RequestParam Long id,
+            @RequestBody @Valid UCSBDiningCommonsMenuItems incoming) {
+
+<span class="fc" id="L90">                UCSBDiningCommonsMenuItems menuItem = ucsbDiningCommonsMenuItemsRepository.findById(id)</span>
+<span class="fc" id="L91">                .orElseThrow(() -&gt; new EntityNotFoundException(UCSBDiningCommonsMenuItems.class, id));</span>
+
+<span class="fc" id="L93">                menuItem.setDiningCommonsCode(incoming.getDiningCommonsCode());</span>
+<span class="fc" id="L94">                menuItem.setName(incoming.getName());</span>
+<span class="fc" id="L95">                menuItem.setStation(incoming.getStation());</span>
+
+<span class="fc" id="L97">        ucsbDiningCommonsMenuItemsRepository.save(menuItem);</span>
+
+<span class="fc" id="L99">        return menuItem;</span>
+    } 
+
+    @Operation(summary= &quot;Delete a UCSBDine&quot;)
+    @PreAuthorize(&quot;hasRole('ROLE_ADMIN')&quot;)
+    @DeleteMapping(&quot;&quot;)
+    public Object deleteUCSBDate(
+            @Parameter(name=&quot;id&quot;) @RequestParam Long id) {
+<span class="fc" id="L107">                UCSBDiningCommonsMenuItems ucsbDate = ucsbDiningCommonsMenuItemsRepository.findById(id)</span>
+<span class="fc" id="L108">                .orElseThrow(() -&gt; new EntityNotFoundException(UCSBDiningCommonsMenuItems.class, id));</span>
+
+<span class="fc" id="L110">                ucsbDiningCommonsMenuItemsRepository.delete(ucsbDate);</span>
+<span class="fc" id="L111">        return genericMessage(&quot;UCSBDiningCommonsMenuItems with id 123 not found&quot;.formatted(id));</span>
+    }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
