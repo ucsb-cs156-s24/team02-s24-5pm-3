@@ -46,7 +46,7 @@
                     "constraints": {
                       "nullable": false
                     },
-                    "name": "REVIEWEREMAIL",
+                    "name": "REVIEWER_EMAIL",
                     "type": "VARCHAR(255)"
                   }
                 },
@@ -64,7 +64,7 @@
                     "constraints": {
                       "nullable": false
                     },
-                    "name": "DATEREVIEWED",
+                    "name": "DATE_REVIEWED",
                     "type": "TIMESTAMP"
                   }
                 },
