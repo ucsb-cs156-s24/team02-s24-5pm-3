@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 
 @Tag(name = "UCSBOrganizations")
-@RequestMapping("/api/ucsborganizations")
+@RequestMapping("/api/UCSBOrganization")
 @RestController
 @Slf4j
 public class UCSBOrganizationsController extends ApiController {
@@ -92,7 +92,7 @@ public class UCSBOrganizationsController extends ApiController {
         UCSBOrganizations orgs = ucsbOrganizationsRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(UCSBOrganizations.class, id));
 
-        orgs.setOrgCode(incoming.getOrgCode());
+        // orgs.setOrgCode(incoming.getOrgCode());
         orgs.setOrgTranslationShort(incoming.getOrgTranslationShort());
         orgs.setOrgTranslation(incoming.getOrgTranslation());
         orgs.setInactive(incoming.getInactive());

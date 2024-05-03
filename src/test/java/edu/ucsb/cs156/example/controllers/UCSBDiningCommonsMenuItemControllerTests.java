@@ -46,14 +46,14 @@ public class UCSBDiningCommonsMenuItemControllerTests extends ControllerTestCase
         
     @Test
     public void logged_out_users_cannot_get_all() throws Exception {
-            mockMvc.perform(get("/api/ucsbDiningCommonsMenuItems/all"))
+            mockMvc.perform(get("/api/UCSBDiningCommonsMenuItem/all"))
                             .andExpect(status().is(403)); // logged out users can't get all
     }
 
     @WithMockUser(roles = { "USER" })
     @Test
     public void logged_in_users_can_get_all() throws Exception {
-            mockMvc.perform(get("/api/ucsbDiningCommonsMenuItems/all"))
+            mockMvc.perform(get("/api/UCSBDiningCommonsMenuItem/all"))
                             .andExpect(status().is(200)); // logged
     }
 
@@ -83,7 +83,7 @@ public class UCSBDiningCommonsMenuItemControllerTests extends ControllerTestCase
             when(ucsbDiningCommonsMenuItemsRepository.findAll()).thenReturn(expectedDates);
 
             // act
-            MvcResult response = mockMvc.perform(get("/api/ucsbDiningCommonsMenuItems/all"))
+            MvcResult response = mockMvc.perform(get("/api/UCSBDiningCommonsMenuItem/all"))
                             .andExpect(status().isOk()).andReturn();
 
             // assert
@@ -99,14 +99,14 @@ public class UCSBDiningCommonsMenuItemControllerTests extends ControllerTestCase
 
     @Test
     public void logged_out_users_cannot_post() throws Exception {
-            mockMvc.perform(post("/api/ucsbDiningCommonsMenuItems/post"))
+            mockMvc.perform(post("/api/UCSBDiningCommonsMenuItem/post"))
                             .andExpect(status().is(403));
     }
 
     @WithMockUser(roles = { "USER" })
     @Test
     public void logged_in_regular_users_cannot_post() throws Exception {
-            mockMvc.perform(post("/api/ucsbDiningCommonsMenuItems/post"))
+            mockMvc.perform(post("/api/UCSBDiningCommonsMenuItem/post"))
                             .andExpect(status().is(403)); // only admins can post
     }
 
@@ -127,7 +127,7 @@ public class UCSBDiningCommonsMenuItemControllerTests extends ControllerTestCase
 
             // act
             MvcResult response = mockMvc.perform(
-                            post("/api/ucsbDiningCommonsMenuItems/post?id=0&diningCommonsCode=diningCommonsCode&name=name&station=station")
+                            post("/api/UCSBDiningCommonsMenuItem/post?id=0&diningCommonsCode=diningCommonsCode&name=name&station=station")
                                             .with(csrf()))
                             .andExpect(status().isOk()).andReturn();
 
@@ -142,7 +142,7 @@ public class UCSBDiningCommonsMenuItemControllerTests extends ControllerTestCase
 
         @Test
         public void logged_out_users_cannot_get_by_id() throws Exception {
-                mockMvc.perform(get("/api/ucsbDiningCommonsMenuItems?id=123"))
+                mockMvc.perform(get("/api/UCSBDiningCommonsMenuItem?id=123"))
                                 .andExpect(status().is(403)); // logged out users can't get by id
         }
 
@@ -161,7 +161,7 @@ public class UCSBDiningCommonsMenuItemControllerTests extends ControllerTestCase
                 when(ucsbDiningCommonsMenuItemsRepository.findById(eq(123L))).thenReturn(Optional.of(ucsbDining));
 
                 // act
-                MvcResult response = mockMvc.perform(get("/api/ucsbDiningCommonsMenuItems?id=123"))
+                MvcResult response = mockMvc.perform(get("/api/UCSBDiningCommonsMenuItem?id=123"))
                                 .andExpect(status().isOk()).andReturn();
 
                 // assert
@@ -181,7 +181,7 @@ public class UCSBDiningCommonsMenuItemControllerTests extends ControllerTestCase
                 when(ucsbDiningCommonsMenuItemsRepository.findById(eq(123L))).thenReturn(Optional.empty());
 
                 // act
-                MvcResult response = mockMvc.perform(get("/api/ucsbDiningCommonsMenuItems?id=123"))
+                MvcResult response = mockMvc.perform(get("/api/UCSBDiningCommonsMenuItem?id=123"))
                                 .andExpect(status().isNotFound()).andReturn();
 
                 // assert
@@ -218,7 +218,7 @@ public class UCSBDiningCommonsMenuItemControllerTests extends ControllerTestCase
 
                 // act
                 MvcResult response = mockMvc.perform(
-                                put("/api/ucsbDiningCommonsMenuItems?id=123")
+                                put("/api/UCSBDiningCommonsMenuItem?id=123")
                                                 .contentType(MediaType.APPLICATION_JSON)
                                                 .characterEncoding("utf-8")
                                                 .content(requestBody)
@@ -251,7 +251,7 @@ public class UCSBDiningCommonsMenuItemControllerTests extends ControllerTestCase
 
                 // act
                 MvcResult response = mockMvc.perform(
-                                put("/api/ucsbDiningCommonsMenuItems?id=123")
+                                put("/api/UCSBDiningCommonsMenuItem?id=123")
                                                 .contentType(MediaType.APPLICATION_JSON)
                                                 .characterEncoding("utf-8")
                                                 .content(requestBody)
@@ -281,7 +281,7 @@ public class UCSBDiningCommonsMenuItemControllerTests extends ControllerTestCase
 
                 // act
                 MvcResult response = mockMvc.perform(
-                                delete("/api/ucsbDiningCommonsMenuItems?id=123")
+                                delete("/api/UCSBDiningCommonsMenuItem?id=123")
                                                 .with(csrf()))
                                 .andExpect(status().isOk()).andReturn();
 
@@ -303,7 +303,7 @@ public class UCSBDiningCommonsMenuItemControllerTests extends ControllerTestCase
 
                 // act
                 MvcResult response = mockMvc.perform(
-                                delete("/api/ucsbDiningCommonsMenuItems?id=123")
+                                delete("/api/UCSBDiningCommonsMenuItem?id=123")
                                                 .with(csrf()))
                                 .andExpect(status().isNotFound()).andReturn();
 
