@@ -31,40 +31,43 @@ import java.time.LocalDateTime;
 @RequestMapping("/api/menuitemreview")
 @RestController
 @Slf4j
-public class MenuItemRevivewController extends ApiController {
+public class MenuItemReviewController extends ApiController {
 
     @Autowired
-    MenuItemReviewRepository MenuItemReviewRepository;
+    MenuItemReviewRepository menuItemReviewRepository;
 
-    @Operation(summary = "List all menu item reviews")
+    @Operation(summary= "List all menu item reviews")
     @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping("/all")
-    public Iterable<MenuItemReview> allUMenuItemReview() {
-        Iterable<MenuItemReview> reviews = MenuItemReviewRepository.findAll();
+    public Iterable<MenuItemReview> allMenuItemReviews() {
+        Iterable<MenuItemReview> reviews = menuItemReviewRepository.findAll();
         return reviews;
     }
 
-    @Operation(summary = "Create a new review")
+    @Operation(summary= "Create a new menu item review")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/post")
     public MenuItemReview postMenuItemReview(
-            @Parameter(name = "itemid") @RequestParam long itemId,
-            @Parameter(name = "email") @RequestParam String reviewerEmail,
-            @Parameter(name = "stars (from 0 to 5)") @RequestParam int stars,
-            @Parameter(name = "date reviewed") @RequestParam("dateReviewed") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime dateReviewed,
-            @Parameter(name = "comments") @RequestParam String comments)
+            @Parameter(name="itemID") @RequestParam long itemID,
+            @Parameter(name="reviewerEmail") @RequestParam String reviewerEmail,
+            @Parameter(name="stars") @RequestParam int stars,
+            @Parameter(name="dateReviewed") @RequestParam("dateReviewed") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime dateReviewed,
+            @Parameter(name="comments") @RequestParam String comments)
             throws JsonProcessingException {
+
+        // For an explanation of @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+        // See: https://www.baeldung.com/spring-date-parameters
 
         log.info("localDateTime={}", dateReviewed);
 
         MenuItemReview menuItemReview = new MenuItemReview();
-        menuItemReview.setItemId(itemId);
+        menuItemReview.setItemID(itemID);
         menuItemReview.setReviewerEmail(reviewerEmail);
         menuItemReview.setStars(stars);
         menuItemReview.setDateReviewed(dateReviewed);
         menuItemReview.setComments(comments);
 
-        MenuItemReview savedMenuItemReview = MenuItemReviewRepository.save(menuItemReview);
+        MenuItemReview savedMenuItemReview = menuItemReviewRepository.save(menuItemReview);
 
         return savedMenuItemReview;
     }
