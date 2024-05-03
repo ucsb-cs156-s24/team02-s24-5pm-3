@@ -2,7 +2,7 @@
   "databaseChangeLog": [
     {
       "changeSet": {
-        "id": "MenuItemReview-6",
+        "id": "MenuItemReview-7",
         "author": "Tyler",
         "preConditions": [
           {
@@ -38,7 +38,7 @@
                     "constraints": {
                       "nullable": false
                     },
-                    "name": "ITEM_ID",
+                    "name": "ITEMID",
                     "type": "BIGINT"
                   }
                 },
