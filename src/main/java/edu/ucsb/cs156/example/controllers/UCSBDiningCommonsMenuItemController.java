@@ -29,7 +29,7 @@ import javax.validation.Valid;
 
 import java.time.LocalDateTime;
 
-@Tag(name = "ucsbdiningcommonsmenuitem")
+@Tag(name = "UCSBDiningCommonsMenuItem")
 @RequestMapping("/api/UCSBDiningCommonsMenuItem")
 @RestController
 @Slf4j
