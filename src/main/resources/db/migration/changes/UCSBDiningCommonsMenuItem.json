@@ -2,8 +2,8 @@
   "databaseChangeLog": [
     {
       "changeSet": {
-        "id": "UCSBOrganizations-1",
-        "author": "MattP",
+        "id": "UCSBDiningCommonsMenuItem-1",
+        "author": "AaronR",
         "preConditions": [
           {
             "onFail": "MARK_RAN"
@@ -12,7 +12,7 @@
             "not": [
               {
                 "tableExists": {
-                  "tableName": "UCSBORGANIZATIONS"
+                  "tableName": "UCSBDININGCOMMONSMENUITEMS"
                 }
               }
             ]
@@ -24,37 +24,35 @@
               "columns": [
                 {
                   "column": {
+                    "autoIncrement": true,
                     "constraints": {
                       "primaryKey": true,
-                      "primaryKeyName": "CONSTRAINT_114"
+                      "primaryKeyName": "CONSTRAINT_50"
                     },
-                    "name": "ORG_CODE",
+                    "name": "ID",
+                    "type": "BIGINT"
+                  }
+                },
+                {
+                  "column": {
+                    "name": "DINING_COMMONS_CODE",
                     "type": "VARCHAR(255)"
                   }
                 },
                 {
                   "column": {
-                    "constraints": {
-                      "nullable": false
-                    },
-                    "name": "INACTIVE",
-                    "type": "BOOLEAN"
-                  }
-                },
-                {
-                  "column": {
-                    "name": "ORG_TRANSLATION_SHORT",
+                    "name": "NAME",
                     "type": "VARCHAR(255)"
                   }
                 },
                 {
                   "column": {
-                    "name": "ORG_TRANSLATION",
+                    "name": "STATION",
                     "type": "VARCHAR(255)"
                   }
                 }
               ],
-              "tableName": "UCSBORGANIZATIONS"
+              "tableName": "UCSBDININGCOMMONSMENUITEMS"
             }
           }
         ]

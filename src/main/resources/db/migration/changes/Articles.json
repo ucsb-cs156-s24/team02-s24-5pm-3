@@ -1,9 +1,8 @@
-{
-  "databaseChangeLog": [
+{ "databaseChangeLog": [
     {
       "changeSet": {
-        "id": "UCSBOrganizations-1",
-        "author": "MattP",
+        "id": "Articles-1",
+        "author": "AaronL",
         "preConditions": [
           {
             "onFail": "MARK_RAN"
@@ -12,7 +11,7 @@
             "not": [
               {
                 "tableExists": {
-                  "tableName": "UCSBORGANIZATIONS"
+                  "tableName": "ARTICLES"
                 }
               }
             ]
@@ -24,37 +23,47 @@
               "columns": [
                 {
                   "column": {
+                    "autoIncrement": true,
                     "constraints": {
                       "primaryKey": true,
-                      "primaryKeyName": "CONSTRAINT_114"
+                      "primaryKeyName": "CONSTRAINT_6"
                     },
-                    "name": "ORG_CODE",
+                    "name": "ID",
+                    "type": "BIGINT"
+                  }
+                },
+                {
+                  "column": {
+                    "name": "TITLE",
                     "type": "VARCHAR(255)"
                   }
                 },
                 {
                   "column": {
-                    "constraints": {
-                      "nullable": false
-                    },
-                    "name": "INACTIVE",
-                    "type": "BOOLEAN"
-                  }
-                },
-                {
-                  "column": {
-                    "name": "ORG_TRANSLATION_SHORT",
+                    "name": "URL",
                     "type": "VARCHAR(255)"
                   }
                 },
                 {
                   "column": {
-                    "name": "ORG_TRANSLATION",
+                    "name": "EXPLANATION",
                     "type": "VARCHAR(255)"
+                  }
+                },
+                {
+                    "column": {
+                      "name": "EMAIL",
+                      "type": "VARCHAR(255)"
+                    }
+                },
+                {
+                  "column": {
+                    "name": "DATE_ADDED",
+                    "type": "TIMESTAMP"
                   }
                 }
               ],
-              "tableName": "UCSBORGANIZATIONS"
+              "tableName": "ARTICLES"
             }
           }
         ]
