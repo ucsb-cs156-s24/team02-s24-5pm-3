@@ -1,0 +1,76 @@
+{
+  "databaseChangeLog": [
+    {
+      "changeSet": {
+        "id": "MenuItemReview-3",
+        "author": "Tyler",
+        "preConditions": [
+          {
+            "onFail": "MARK_RAN"
+          },
+          {
+            "not": [
+              {
+                "tableExists": {
+                  "tableName": "MENUITEMREVIEW"
+                }
+              }
+            ]
+          }
+        ],
+        "changes": [
+          {
+            "createTable": {
+              "columns": [
+                {
+                  "column": {
+                    "constraints": {
+                      "primaryKey": true,
+                      "primaryKeyName": "CONSTRAINT_3"
+                    },
+                    "name": "ID",
+                    "type": "BIGINT"
+                  }
+                },
+                {
+                  "column": {
+                    "constraints": {
+                      "nullable": false
+                    },
+                    "name": "REVIEWEREMAIL",
+                    "type": "VARCHAR(255)"
+                  }
+                },
+                {
+                  "column": {
+                    "constraints": {
+                      "nullable": false
+                    },
+                    "name": "STARS",
+                    "type": "INT"
+                  }
+                },
+                {
+                  "column": {
+                    "constraints": {
+                      "nullable": false
+                    },
+                    "name": "DATEREVIEWED",
+                    "type": "TIMESTAMP"
+                  }
+                },
+                {
+                  "column": {
+                    "name": "COMMENTS",
+                    "type": "VARCHAR(255)"
+                  }
+                }
+              ],
+              "tableName": "MENUITEMREVIEW"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
