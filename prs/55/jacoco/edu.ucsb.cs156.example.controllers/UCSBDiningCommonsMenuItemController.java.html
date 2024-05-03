@@ -98,5 +98,17 @@ import java.time.LocalDateTime;
 
 <span class="fc" id="L99">        return menuItem;</span>
     } 
+
+    @Operation(summary= &quot;Delete a UCSBDine&quot;)
+    @PreAuthorize(&quot;hasRole('ROLE_ADMIN')&quot;)
+    @DeleteMapping(&quot;&quot;)
+    public Object deleteUCSBDate(
+            @Parameter(name=&quot;id&quot;) @RequestParam Long id) {
+<span class="fc" id="L107">                UCSBDiningCommonsMenuItems ucsbDate = ucsbDiningCommonsMenuItemsRepository.findById(id)</span>
+<span class="fc" id="L108">                .orElseThrow(() -&gt; new EntityNotFoundException(UCSBDiningCommonsMenuItems.class, id));</span>
+
+<span class="fc" id="L110">                ucsbDiningCommonsMenuItemsRepository.delete(ucsbDate);</span>
+<span class="fc" id="L111">        return genericMessage(&quot;UCSBDiningCommonsMenuItems with id 123 not found&quot;.formatted(id));</span>
+    }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
