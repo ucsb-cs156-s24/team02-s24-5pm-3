@@ -254,7 +254,7 @@ public class UCSBOrganizationsControllerTests extends ControllerTestCase {
                                 .build();
 
                 UCSBOrganizations org2 = UCSBOrganizations.builder()
-                                .orgCode("ORG11")
+                                .orgCode("ORG1")
                                 .orgTranslationShort("O2")
                                 .orgTranslation("Organization 2")
                                 .inactive(true)
@@ -286,7 +286,7 @@ public class UCSBOrganizationsControllerTests extends ControllerTestCase {
                 // arrange
 
                 UCSBOrganizations org2 = UCSBOrganizations.builder()
-                                .orgCode("ORG2")
+                                .orgCode("ORG1")
                                 .orgTranslationShort("O2")
                                 .orgTranslation("Organization 2")
                                 .inactive(false)
