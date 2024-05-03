@@ -42,18 +42,18 @@ public class MenuItemReviewControllerTests extends ControllerTestCase {
         @MockBean
         UserRepository userRepository;
 
-        // Tests for GET /api/menuitemreview/all
+        // Tests for GET /api/MenuItemReview/all
         
         @Test
         public void logged_out_users_cannot_get_all() throws Exception {
-                mockMvc.perform(get("/api/menuitemreview/all"))
+                mockMvc.perform(get("/api/MenuItemReview/all"))
                                 .andExpect(status().is(403)); // logged out users can't get all
         }
 
         @WithMockUser(roles = { "USER" })
         @Test
         public void logged_in_users_can_get_all() throws Exception {
-                mockMvc.perform(get("/api/menuitemreview/all"))
+                mockMvc.perform(get("/api/MenuItemReview/all"))
                                 .andExpect(status().is(200)); // logged
         }
 
@@ -88,7 +88,7 @@ public class MenuItemReviewControllerTests extends ControllerTestCase {
                 when(menuItemReviewRepository.findAll()).thenReturn(expectedDates);
 
                 // act
-                MvcResult response = mockMvc.perform(get("/api/menuitemreview/all"))
+                MvcResult response = mockMvc.perform(get("/api/MenuItemReview/all"))
                                 .andExpect(status().isOk()).andReturn();
 
                 // assert
@@ -99,18 +99,18 @@ public class MenuItemReviewControllerTests extends ControllerTestCase {
                 assertEquals(expectedJson, responseString);
         }
 
-        // Tests for POST /api/menuitemreview/post...
+        // Tests for POST /api/MenuItemReview/post...
 
         @Test
         public void logged_out_users_cannot_post() throws Exception {
-                mockMvc.perform(post("/api/menuitemreview/post"))
+                mockMvc.perform(post("/api/MenuItemReview/post"))
                                 .andExpect(status().is(403));
         }
 
         @WithMockUser(roles = { "USER" })
         @Test
         public void logged_in_regular_users_cannot_post() throws Exception {
-                mockMvc.perform(post("/api/menuitemreview/post"))
+                mockMvc.perform(post("/api/MenuItemReview/post"))
                                 .andExpect(status().is(403)); // only admins can post
         }
 
@@ -133,7 +133,7 @@ public class MenuItemReviewControllerTests extends ControllerTestCase {
 
                 // act
                 MvcResult response = mockMvc.perform(
-                                post("/api/menuitemreview/post?itemID=5&reviewerEmail=test@gmail.com&stars=5&dateReviewed=2022-01-03T00:00:00&comments=good")
+                                post("/api/MenuItemReview/post?itemID=5&reviewerEmail=test@gmail.com&stars=5&dateReviewed=2022-01-03T00:00:00&comments=good")
                                                 .with(csrf()))
                                 .andExpect(status().isOk()).andReturn();
 
@@ -144,11 +144,11 @@ public class MenuItemReviewControllerTests extends ControllerTestCase {
                 assertEquals(expectedJson, responseString);
         }
 
-        // Tests for GET /api/menuitemreview?id=...
+        // Tests for GET /api/MenuItemReview?id=...
 
         @Test
         public void logged_out_users_cannot_get_by_id() throws Exception {
-                mockMvc.perform(get("/api/menuitemreview?id=7"))
+                mockMvc.perform(get("/api/MenuItemReview?id=7"))
                                 .andExpect(status().is(403)); // logged out users can't get by id
         }
 
@@ -170,7 +170,7 @@ public class MenuItemReviewControllerTests extends ControllerTestCase {
                 when(menuItemReviewRepository.findById(eq(7L))).thenReturn(Optional.of(menuItemReview));
 
                 // act
-                MvcResult response = mockMvc.perform(get("/api/menuitemreview?id=7"))
+                MvcResult response = mockMvc.perform(get("/api/MenuItemReview?id=7"))
                                 .andExpect(status().isOk()).andReturn();
 
                 // assert
@@ -190,7 +190,7 @@ public class MenuItemReviewControllerTests extends ControllerTestCase {
                 when(menuItemReviewRepository.findById(eq(7L))).thenReturn(Optional.empty());
 
                 // act
-                MvcResult response = mockMvc.perform(get("/api/menuitemreview?id=7"))
+                MvcResult response = mockMvc.perform(get("/api/MenuItemReview?id=7"))
                                 .andExpect(status().isNotFound()).andReturn();
 
                 // assert
@@ -202,7 +202,7 @@ public class MenuItemReviewControllerTests extends ControllerTestCase {
         }
 
 
-        // Tests for DELETE /api/menuitemreview?id=... 
+        // Tests for DELETE /api/MenuItemReview?id=... 
 
         @WithMockUser(roles = { "ADMIN", "USER" })
         @Test
@@ -223,7 +223,7 @@ public class MenuItemReviewControllerTests extends ControllerTestCase {
 
                 // act
                 MvcResult response = mockMvc.perform(
-                                delete("/api/menuitemreview?id=15")
+                                delete("/api/MenuItemReview?id=15")
                                                 .with(csrf()))
                                 .andExpect(status().isOk()).andReturn();
 
@@ -245,7 +245,7 @@ public class MenuItemReviewControllerTests extends ControllerTestCase {
 
                 // act
                 MvcResult response = mockMvc.perform(
-                                delete("/api/menuitemreview?id=15")
+                                delete("/api/MenuItemReview?id=15")
                                                 .with(csrf()))
                                 .andExpect(status().isNotFound()).andReturn();
 
@@ -255,7 +255,7 @@ public class MenuItemReviewControllerTests extends ControllerTestCase {
                 assertEquals("MenuItemReview with id 15 not found", json.get("message"));
         }
 
-        //Tests for PUT /api/menuitemreview?id=... 
+        //Tests for PUT /api/MenuItemReview?id=... 
 
         @WithMockUser(roles = { "ADMIN", "USER" })
         @Test
@@ -287,7 +287,7 @@ public class MenuItemReviewControllerTests extends ControllerTestCase {
 
                 // act
                 MvcResult response = mockMvc.perform(
-                                put("/api/menuitemreview?id=67")
+                                put("/api/MenuItemReview?id=67")
                                                 .contentType(MediaType.APPLICATION_JSON)
                                                 .characterEncoding("utf-8")
                                                 .content(requestBody)
@@ -323,7 +323,7 @@ public class MenuItemReviewControllerTests extends ControllerTestCase {
 
                 // act
                 MvcResult response = mockMvc.perform(
-                                put("/api/menuitemreview?id=67")
+                                put("/api/MenuItemReview?id=67")
                                                 .contentType(MediaType.APPLICATION_JSON)
                                                 .characterEncoding("utf-8")
                                                 .content(requestBody)
