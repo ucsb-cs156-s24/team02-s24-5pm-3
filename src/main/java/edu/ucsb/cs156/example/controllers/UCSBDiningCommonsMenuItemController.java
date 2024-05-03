@@ -37,7 +37,8 @@ public class UCSBDiningCommonsMenuItemController extends ApiController {
 
     @Autowired
     UCSBDiningCommonsMenuItemsRepository ucsbDiningCommonsMenuItemsRepository;
-    
+
+    @Operation(summary= "List all ucsb menu items")
     @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping("/all")	
     public Iterable<UCSBDiningCommonsMenuItems> allUCSBDates() {
@@ -45,6 +46,7 @@ public class UCSBDiningCommonsMenuItemController extends ApiController {
         return dates;
     }
 
+    @Operation(summary= "Create a new ucsb menu items")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/post")
     public UCSBDiningCommonsMenuItems postUCSBDiningCommonsMenuItems(
@@ -80,7 +82,7 @@ public class UCSBDiningCommonsMenuItemController extends ApiController {
         return ucsbDiningCommonsMenuItems;
     }
 
-    @Operation(summary= "Update a single menu")
+    @Operation(summary= "Update a single menu item")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping("")
     public UCSBDiningCommonsMenuItems updateUCSBDiningCommonsMenuItem(
@@ -99,7 +101,7 @@ public class UCSBDiningCommonsMenuItemController extends ApiController {
         return menuItem;
     } 
 
-    @Operation(summary= "Delete a UCSBDine")
+    @Operation(summary= "Delete a Menu Item")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("")
     public Object deleteUCSBDate(
