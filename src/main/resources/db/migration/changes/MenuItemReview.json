@@ -2,7 +2,7 @@
   "databaseChangeLog": [
     {
       "changeSet": {
-        "id": "MenuItemReview-3",
+        "id": "MenuItemReview-4",
         "author": "Tyler",
         "preConditions": [
           {
@@ -24,6 +24,7 @@
               "columns": [
                 {
                   "column": {
+                    "autoIncrement": true,
                     "constraints": {
                       "primaryKey": true,
                       "primaryKeyName": "CONSTRAINT_3"
@@ -37,7 +38,16 @@
                     "constraints": {
                       "nullable": false
                     },
-                    "name": "REVIEWEREMAIL",
+                    "name": "ITEMID",
+                    "type": "BIGINT"
+                  }
+                },
+                {
+                  "column": {
+                    "constraints": {
+                      "nullable": false
+                    },
+                    "name": "REVIEWER_EMAIL",
                     "type": "VARCHAR(255)"
                   }
                 },
@@ -55,7 +65,7 @@
                     "constraints": {
                       "nullable": false
                     },
-                    "name": "DATEREVIEWED",
+                    "name": "DATE_REVIEWED",
                     "type": "TIMESTAMP"
                   }
                 },
